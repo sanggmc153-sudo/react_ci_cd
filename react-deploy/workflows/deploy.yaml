@@ -1,0 +1,22 @@
+# 파일명: deploy.yaml
+
+name: React 코드 가져오기 
+
+on: [push]
+
+jobs:
+  reactDeploy:
+    runs-on: ubuntu-24.04
+    
+    steps:
+      # 1. 
+      - uses: actions/checkout@v6
+      # 2. 도구 가져오기
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+        # 3. 도구를 이용해서 압축하기 
+      - run: npm ci  
+      - run: npm run build  
+        # 확인
+      - run: ls -l dist  
