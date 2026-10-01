@@ -31,3 +31,8 @@ jobs:
           source: dist/*
           target: /var/www/html
           strip_components: 1
+
+ #strip_components: 1 를 안하면 
+# EC2 컴퓨터 안에 /var/www/html/dist/ 파일들
+#  접속 경로 
+#  http://ip/dist 불편하다         

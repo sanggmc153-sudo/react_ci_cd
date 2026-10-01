@@ -1,6 +1,8 @@
+import './App.css';
+
 function App() {
   return (
-    <div>
+    <div className="app">
       <h2>리액트를 이용한 CI/CD</h2>
       <h3>빌드 파일 추가</h3>
     </div>
