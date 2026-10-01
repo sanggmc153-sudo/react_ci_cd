@@ -1,0 +1,38 @@
+# 파일명: deploy.yaml
+
+name: React 코드 가져오기 
+
+on: [push]
+
+jobs:
+  reactDeploy:
+    runs-on: ubuntu-24.04
+
+    steps:
+        #1. 코드가져오기
+      - uses: actions/checkout@v6
+
+        #2. 도구 가져오기
+      - uses: actions/setup-node@v4
+        with:
+          node-version : 22
+        #3.  도구를 이용해서 압축하기!
+      - run: npm ci
+      - run: npm run build
+        #4. 확인
+      - run: ls -l dist
+
+        #EC2로 보내기
+      - uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          source: dist/*
+          target: /var/www/html
+          strip_components: 1
+
+ #strip_components: 1 를 안하면 
+# EC2 컴퓨터 안에 /var/www/html/dist/ 파일들
+#  접속 경로 
+#  http://ip/dist 불편하다         
