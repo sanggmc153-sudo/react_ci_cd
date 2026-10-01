@@ -1,0 +1,12 @@
+# 파일명: deploy.yaml
+
+name: React 코드 가져오기 
+
+on: [push]
+
+jobs:
+  reactDeploy:
+    runs-on: ubuntu-24.04
+    
+    steps:
+      - uses: actions/checkout@v6
